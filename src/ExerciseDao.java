@@ -24,6 +24,7 @@ public class ExerciseDao {
             "SELECT * FROM exercises";
     
     
+    
     public Exercise create(Exercise exercise) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement =
@@ -110,5 +111,6 @@ public class ExerciseDao {
         }
         return null;
     }
+    
     
 }

@@ -29,6 +29,8 @@ public class SolutionDao {
             "SELECT * FROM solutions WHERE user_id = ?";
     private static final String FIND_ALL_SOLUTIONS_BY_EXERCISE_QUERY =
             "SELECT * FROM solutions WHERE exercise_id = ?";
+    private static final String FIND_EMPTY_SOLUTIONS_BY_USER_QUERY =
+            "SELECT * FROM solutions WHERE user_id = ? AND description = '';";
     
     
     public Solution create(Solution solution) {
@@ -151,8 +153,12 @@ public class SolutionDao {
     }
     
     public Solution[] findAllByUserId(int userId) {
+        return findSolutions(userId, FIND_ALL_SOLUTIONS_BY_USER_QUERY);
+    }
+    
+    public Solution[] findSolutions(int userId, String query) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = conn.prepareStatement(FIND_ALL_SOLUTIONS_BY_USER_QUERY)) {
+             PreparedStatement statement = conn.prepareStatement(query)) {
             Solution[] solutions = new Solution[0];
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -171,6 +177,11 @@ public class SolutionDao {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    
+    public Solution[] findAllByUserIdWithoutSolution(int userId) {
+        return findSolutions(userId, FIND_EMPTY_SOLUTIONS_BY_USER_QUERY);
     }
     
     public Solution[] findAllByExerciseId(int exerciseId) {

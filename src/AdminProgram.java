@@ -1,9 +1,10 @@
 import java.util.Date;
 import java.util.Scanner;
 
-public class Main2 {
+public class AdminProgram {
     
     public static void main(String[] args) {
+        //System.out.println(args[0]);
         run();
     }
     
@@ -367,9 +368,9 @@ public class Main2 {
     private static void addExerciseToUser(Scanner scanner) {
 
 //        jeśli wybrano add – wyświetli listę wszystkich użytkowników, odpyta o id,
-//        następniewyświetli listę wszystkich zadań i zapyta o id zadania,
+//        następnie wyświetli listę wszystkich zadań i zapyta o id zadania,
 //        utworzy i zapisze obiekt typu Solution. Pole created wypełni się automatycznie,
-//        a pola updated i description mają zostaćpuste.
+//        a pola updated i description mają zostać puste.
         printUsers();
         System.out.println();
         System.out.println("Wybierz ID użytkownika.");
